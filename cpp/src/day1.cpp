@@ -1,18 +1,16 @@
+#include <deque>
 #include <iostream>
 #include <limits>
-#include <deque>
 #include <numeric>
 
-int main()
-{
+int main() {
     int prev = std::numeric_limits<int>::max();
     int prev_smoothed = std::numeric_limits<int>::max();
     int count = 0, count_smoothed = 0;
 
     std::deque<int> window;
 
-    for (int d; std::cin >> d; )
-    {
+    for (int d; std::cin >> d;) {
         if (d > prev) {
             ++count;
         }
