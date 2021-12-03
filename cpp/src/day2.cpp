@@ -2,12 +2,12 @@
 #include <limits>
 
 int main() {
+    int pos = 0, depth = 0, aim = 0;
+
     std::string cmd;
     int val;
 
-    int pos = 0, depth = 0, aim = 0;
-
-    while ((std::cin >> cmd >> val)) {
+    while (std::cin >> cmd >> val) {
         switch (cmd[0]) {
             case 'f':
                 pos += val;
