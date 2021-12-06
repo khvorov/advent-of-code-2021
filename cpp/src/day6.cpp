@@ -1,50 +1,44 @@
+#include <algorithm>
 #include <iostream>
-#include <limits>
+#include <numeric>
 #include <sstream>
+#include <string>
 #include <vector>
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::vector<int> fishes;
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <number of days>\n";
+        return -1;
+    }
+
+    std::size_t n_days = std::stoul(argv[1]) + 1;
+
+    // age of fish -> number of fishes (max age - 8)
+    std::vector<std::size_t> fishes(9, 0);
 
     std::string data;
     std::getline(std::cin, data);
 
     std::stringstream ss(data);
 
-    for (int i; ss >> i;) {
-        fishes.push_back(i);
+    for (std::size_t i; ss >> i;) {
+        ++fishes[i];
 
         if (ss.peek() == ',') {
             ss.ignore();
         }
     }
 
-    for (int d = 0; d < 80; ++d) {
-        int newborn = 0;
+    while (--n_days != 0) {
+        std::size_t f0 = fishes[0];
 
-#if 0
-        for (auto f : fishes) {
-            std::cout << f << ' ';
-        }
-        std::cout << '\n';
-#endif
-
-        for (auto& f : fishes) {
-            if (f == 0) {
-                f = 6;
-                ++newborn;
-            } else {
-                --f;
-            }
-        }
-
-        for (int i = 0; i < newborn; ++i) {
-            fishes.push_back(8);
-        }
+        std::rotate(fishes.begin(), fishes.begin() + 1, fishes.end());
+        fishes[8] = f0;
+        fishes[6] += f0;
     }
 
-    std::cout << fishes.size() << '\n';
+    std::cout << std::accumulate(fishes.begin(), fishes.end(), std::size_t{0}) << '\n';
 
     return 0;
 }
