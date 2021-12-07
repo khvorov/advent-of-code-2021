@@ -36,8 +36,11 @@ int main()
     for (int i = 0; i < int(n); ++i) {
         int curr_sum = 0;
         for (int j = 0; j < int(n); ++j) {
-            curr_sum += std::abs(crabes[j] - i);
+            int d = std::abs(crabes[j] - i);
+            curr_sum += d * (d + 1);
         }
+
+        curr_sum /= 2;
 
         sum = std::min(sum, curr_sum);
     }
