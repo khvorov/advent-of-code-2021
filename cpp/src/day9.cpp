@@ -94,5 +94,5 @@ int main()
 
     std::cout << "p2: " << result << '\n';
 
-    return cols;
+    return 0;
 }
