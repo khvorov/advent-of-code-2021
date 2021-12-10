@@ -87,7 +87,7 @@ int main()
         }
     }
 
-    result = 1;
+    // calculate result
     for (result = 1; !pq.empty(); pq.pop()) {
         result *= pq.top();
     }
